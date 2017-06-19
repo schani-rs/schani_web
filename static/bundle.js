@@ -24158,7 +24158,20 @@ var ImageEditable = exports.ImageEditable = function ImageEditable(_ref) {
       license = _ref.license;
   return _react2.default.createElement(
     'div',
-    { style: { borderRadius: '5px', backgroundColor: 'aliceblue', margin: '3px', padding: '7px', textAlign: 'left', minWidth: '200px', maxWidth: '200px', minHeight: '200px' }, key: id },
+    {
+      style: {
+        borderRadius: '5px',
+        backgroundColor: 'aliceblue',
+        margin: '3px',
+        padding: '7px',
+        textAlign: 'left',
+        minWidth: '200px',
+        maxWidth: '200px',
+        minHeight: '200px',
+        border: '1px solid lightgrey'
+      },
+      key: id
+    },
     _react2.default.createElement(
       _reactBootstrap.Grid,
       { style: { minWidth: '170px', maxWidth: '170px' } },

@@ -13,6 +13,7 @@ export const ImageEditable = ({ id, title, description, license }) => (
       minWidth: '200px',
       maxWidth: '200px',
       minHeight: '200px',
+      border: '1px solid lightgrey',
     }}
     key={id}
   >
