@@ -12,7 +12,6 @@ export function tag({ id, label }) {
 }
 
 export function getAll() {
-  console.log(SCHANI_APIGATEWAY + 'images');
   return [
     {
       id: 1,

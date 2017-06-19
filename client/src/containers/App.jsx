@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider, connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import Header from '../components/Header';
+import Header from './Header';
 import DevTools from './DevTools';
-import ImageList from '../components/ImageList';
-import { getAllImages } from '../actions/images';
+import Images from './Images';
+import Collections from './Collections';
+import Tags from './Tags';
 
-const App = ({ store, images, loadImages }) => (
+const App = ({ store, currNav }) => (
   <Provider store={store} >
     <div>
       <Header />
-      <div>
-        This is Schani!
-        <Button onClick={loadImages} bsStyle="primary">Primary</Button>
-      </div>
-      <ImageList images={images} />
+      {currNav === 'images' ? (<Images />) : ''}
+      {currNav === 'collections' ? (<Collections />) : ''}
+      {currNav === 'tags' ? (<Tags />) : ''}
       <DevTools />
     </div>
   </Provider>
@@ -23,16 +21,11 @@ const App = ({ store, images, loadImages }) => (
 
 App.propTypes = {
   store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  images: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-  loadImages: PropTypes.func.isRequired,
+  currNav: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  images: state.images.images,
+  currNav: state.navigation.currNav,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadImages: () => dispatch(getAllImages()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
