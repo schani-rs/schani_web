@@ -14,7 +14,7 @@ Collections.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  collections: state.tags.tags,
+  collections: state.collections.collections,
 });
 
 const mapDispatchToProps = dispatch => ({

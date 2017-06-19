@@ -1,9 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ControlLabel, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
+import { ControlLabel, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
 
-export const ImageComponent = ({ id, title, description, license, onClick }) => (
-  <Button onClick={() => onClick(id)} style={{ margin: '3px', textAlign: 'left', minWidth: '200px', maxWidth: '200px', minHeight: '200px' }} key={id}>
+export const ImageEditable = ({ id, title, description, license }) => (
+  <div
+    style={{
+      borderRadius: '5px',
+      backgroundColor: 'aliceblue',
+      margin: '3px',
+      padding: '7px',
+      textAlign: 'left',
+      minWidth: '200px',
+      maxWidth: '200px',
+      minHeight: '200px',
+    }}
+    key={id}
+  >
     <Grid style={{ minWidth: '170px', maxWidth: '170px' }}>
       <Row>
         <Thumbnail style={{ minHeight: '170px', minWidth: '170px', maxWidth: '170px', backgroundColor: 'lightgrey' }} src="daff" />
@@ -21,15 +33,14 @@ export const ImageComponent = ({ id, title, description, license, onClick }) => 
         <Col xs={6}>{license}</Col>
       </Row>
     </Grid>
-  </Button>
+  </div>
 );
 
-ImageComponent.propTypes = {
+ImageEditable.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   license: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
-export default ImageComponent;
+export default ImageEditable;

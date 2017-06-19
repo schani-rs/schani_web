@@ -14,7 +14,7 @@ export const Header = ({ navImages, navCollections, navTags }) => (
       <NavItem onClick={navCollections}>Collections</NavItem>
       <NavItem onClick={navTags}>Tags</NavItem>
     </Nav>
-    <Nav>
+    <Nav pullRight>
       <NavItem>Logout</NavItem>
     </Nav>
   </Navbar>

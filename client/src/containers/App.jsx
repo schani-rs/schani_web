@@ -11,9 +11,13 @@ const App = ({ store, currNav }) => (
   <Provider store={store} >
     <div>
       <Header />
-      {currNav === 'images' ? (<Images />) : ''}
-      {currNav === 'collections' ? (<Collections />) : ''}
-      {currNav === 'tags' ? (<Tags />) : ''}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div>
+          {currNav === 'images' ? (<Images />) : ''}
+          {currNav === 'collections' ? (<Collections />) : ''}
+          {currNav === 'tags' ? (<Tags />) : ''}
+        </div>
+      </div>
       <DevTools />
     </div>
   </Provider>
