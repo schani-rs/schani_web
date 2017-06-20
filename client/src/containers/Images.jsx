@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllImages, selectImage } from '../actions/images';
+import { getAllImages, selectImage, loadImageUri } from '../actions/images';
 import { ImageComponent } from '../components/Image';
-import ImageEditable from './ImageEditable';
+import ImageEditable from '../components/ImageEditable';
 
 class Images extends Component {
   componentDidMount() {
@@ -40,7 +40,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadImages: () => dispatch(getAllImages()),
-  selectImage: id => dispatch(selectImage(id)),
+  selectImage: (id) => {
+    dispatch(loadImageUri(id));
+    dispatch(selectImage(id));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);
