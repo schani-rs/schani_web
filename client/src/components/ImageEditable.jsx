@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, ControlLabel, Grid, Row, Col } from 'react-bootstrap';
+import { TagComponent } from './Tag';
 
-const ImageEditable = ({ id, title, description, license, imgLink }) => (
+const ImageEditable = ({ id, title, description, license, imgLink, tags }) => (
   <div
     style={{
       borderRadius: '5px',
@@ -39,6 +40,9 @@ const ImageEditable = ({ id, title, description, license, imgLink }) => (
         <Col xs={2}><ControlLabel>License: </ControlLabel></Col>
         <Col xs={10}>{license}</Col>
       </Row>
+      <Row>
+        {tags.map(t => <TagComponent key={t.id} onClick={() => 0} {...t} />)}
+      </Row>
     </Grid>
   </div>
 );
@@ -49,6 +53,7 @@ ImageEditable.propTypes = {
   description: PropTypes.string.isRequired,
   license: PropTypes.string.isRequired,
   imgLink: PropTypes.string.isRequired,
+  tags: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({

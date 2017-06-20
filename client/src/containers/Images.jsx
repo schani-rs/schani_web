@@ -12,7 +12,7 @@ class Images extends Component {
   render() {
     const getComponent = (i) => {
       if (i.id === this.props.selected) {
-        return <ImageEditable key={i.id} {...i} />;
+        return <ImageEditable key={i.id} {...i} tags={this.props.currTags} />;
       }
       return (<ImageComponent
         onClick={() => {
@@ -35,6 +35,7 @@ class Images extends Component {
 
 Images.propTypes = {
   images: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  currTags: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   loadImages: PropTypes.func.isRequired,
   selectImage: PropTypes.func.isRequired,
   loadTagsOfImage: PropTypes.func.isRequired,
@@ -43,6 +44,7 @@ Images.propTypes = {
 
 const mapStateToProps = state => ({
   images: state.images.images,
+  currTags: state.images.currTags,
   selected: state.images.selected,
 });
 
