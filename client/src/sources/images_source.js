@@ -7,3 +7,7 @@ export const getAll = () =>
 export default getAll;
 
 export const getImageUri = id => SCHANI_APIGATEWAY + 'images/' + id + '/file';
+
+export const getTagsOfImage = id =>
+  fetchWrapper(SCHANI_APIGATEWAY + 'images/' + id + '/tags')
+    .then(images => images);

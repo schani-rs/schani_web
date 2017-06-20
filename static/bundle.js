@@ -12647,7 +12647,7 @@ var updateImage = exports.updateImage = (0, _reduxActions.createAction)('UPDATE_
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllImages = exports.loadImageUri = exports.updateImage = exports.selectImage = exports.getAllImagesErr = exports.getAllImagesSucc = exports.getAllImagesStart = undefined;
+exports.getAllTagsOfImage = exports.getAllImages = exports.loadImageUri = exports.updateImage = exports.selectImage = exports.getAllTagsOfImagesErr = exports.getAllTagsOfImagesSucc = exports.getAllTagsOfImagesStart = exports.getAllImagesErr = exports.getAllImagesSucc = exports.getAllImagesStart = undefined;
 
 var _reduxActions = __webpack_require__(40);
 
@@ -12656,6 +12656,10 @@ var _images_source = __webpack_require__(184);
 var getAllImagesStart = exports.getAllImagesStart = (0, _reduxActions.createAction)('GET_ALL_IMAGES_START');
 var getAllImagesSucc = exports.getAllImagesSucc = (0, _reduxActions.createAction)('GET_ALL_IMAGES_SUCC');
 var getAllImagesErr = exports.getAllImagesErr = (0, _reduxActions.createAction)('GET_ALL_IMAGES_ERR');
+
+var getAllTagsOfImagesStart = exports.getAllTagsOfImagesStart = (0, _reduxActions.createAction)('GET_ALL_TAGS_OF_IMAGES_START');
+var getAllTagsOfImagesSucc = exports.getAllTagsOfImagesSucc = (0, _reduxActions.createAction)('GET_ALL_TAGS_OF_IMAGES_SUCC');
+var getAllTagsOfImagesErr = exports.getAllTagsOfImagesErr = (0, _reduxActions.createAction)('GET_ALL_TAGS_OF_IMAGES_ERR');
 
 var selectImage = exports.selectImage = (0, _reduxActions.createAction)('SELECT_IMAGE');
 var updateImage = exports.updateImage = (0, _reduxActions.createAction)('UPDATE_IMAGE');
@@ -12672,6 +12676,19 @@ var getAllImages = exports.getAllImages = function getAllImages() {
       return Promise.resolve();
     }).catch(function (err) {
       dispatch(getAllImagesErr(new Error(err)));
+      return Promise.resolve();
+    });
+  };
+};
+
+var getAllTagsOfImage = exports.getAllTagsOfImage = function getAllTagsOfImage(id) {
+  return function (dispatch) {
+    dispatch(getAllTagsOfImagesStart);
+    (0, _images_source.getTagsOfImage)(id).then(function (images) {
+      dispatch(getAllTagsOfImagesSucc(images));
+      return Promise.resolve();
+    }).catch(function (err) {
+      dispatch(getAllTagsOfImagesErr(new Error(err)));
       return Promise.resolve();
     });
   };
@@ -12774,7 +12791,7 @@ exports.default = (0, _reduxDevtools.createDevTools)(_react2.default.createEleme
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getImageUri = exports.getAll = undefined;
+exports.getTagsOfImage = exports.getImageUri = exports.getAll = undefined;
 
 var _fetchHelper = __webpack_require__(185);
 
@@ -12791,6 +12808,12 @@ var getAll = exports.getAll = function getAll() {
 exports.default = getAll;
 var getImageUri = exports.getImageUri = function getImageUri(id) {
   return "http://localhost:8001/api/" + 'images/' + id + '/file';
+};
+
+var getTagsOfImage = exports.getTagsOfImage = function getTagsOfImage(id) {
+  return (0, _fetchHelper2.default)("http://localhost:8001/api/" + 'images/' + id + '/tags').then(function (images) {
+    return images;
+  });
 };
 
 /***/ }),
@@ -24997,7 +25020,13 @@ var Images = function (_Component) {
         if (i.id === _this2.props.selected) {
           return _react2.default.createElement(_ImageEditable2.default, _extends({ key: i.id }, i));
         }
-        return _react2.default.createElement(_Image.ImageComponent, _extends({ onClick: _this2.props.selectImage, key: i.id }, i));
+        return _react2.default.createElement(_Image.ImageComponent, _extends({
+          onClick: function onClick() {
+            _this2.props.selectImage(i.id);
+            _this2.props.loadTagsOfImage(i.id);
+          },
+          key: i.id
+        }, i));
       };
       return _react2.default.createElement(
         'div',
@@ -25016,6 +25045,7 @@ Images.propTypes = {
   images: _propTypes2.default.array.isRequired, // eslint-disable-line react/forbid-prop-types
   loadImages: _propTypes2.default.func.isRequired,
   selectImage: _propTypes2.default.func.isRequired,
+  loadTagsOfImage: _propTypes2.default.func.isRequired,
   selected: _propTypes2.default.number.isRequired
 };
 
@@ -25030,6 +25060,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loadImages: function loadImages() {
       return dispatch((0, _images.getAllImages)());
+    },
+    loadTagsOfImage: function loadTagsOfImage(id) {
+      return dispatch((0, _images.getAllTagsOfImage)(id));
     },
     selectImage: function selectImage(id) {
       dispatch((0, _images.loadImageUri)(id));
@@ -25197,26 +25230,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var defaultState = {
   images: [],
   selected: -1,
-  currImageFile: ''
+  currImageFile: '',
+  currTags: []
 };
 
 exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _defineProperty(_handleActions, _images.getAllImagesSucc, function (state, action) {
   return {
     images: action.payload,
     selected: state.selected,
-    currImageFile: state.currImageFile
+    currImageFile: state.currImageFile,
+    currTags: state.currTags
   };
 }), _defineProperty(_handleActions, _images.selectImage, function (state, action) {
   return {
     images: state.images,
     selected: action.payload,
-    currImageFile: state.currImageFile
+    currImageFile: state.currImageFile,
+    currTags: state.currTags
   };
 }), _defineProperty(_handleActions, _images.loadImageUri, function (state, action) {
   return {
     images: state.images,
     selected: state.selected,
-    currImageFile: action.payload
+    currImageFile: action.payload,
+    currTags: state.currTags
+  };
+}), _defineProperty(_handleActions, _images.getAllTagsOfImagesStart, function (state) {
+  return {
+    images: state.images,
+    selected: state.selected,
+    currImageFile: state.currImageFile,
+    currTags: []
+  };
+}), _defineProperty(_handleActions, _images.getAllTagsOfImagesSucc, function (state, action) {
+  return {
+    images: state.images,
+    selected: state.selected,
+    currImageFile: state.currImageFile,
+    currTags: action.payload
   };
 }), _handleActions), defaultState);
 
