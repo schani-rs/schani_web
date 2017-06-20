@@ -15,18 +15,17 @@ const ImageEditable = ({ id, title, description, license, imgLink, tags }) => (
       minWidth: '400px',
       maxWidth: '400px',
       minHeight: '100px',
-      maxHeight: '300px',
       border: '1px solid lightgrey',
     }}
     key={id}
   >
-    <Grid style={{ minWidth: '170px', maxWidth: '400px' }}>
+    <Grid style={{ maxWidth: '400px' }}>
       <Row>
-        <Col xs={2} />
-        <Col xs={8}>
-          <Image style={{ maxWidth: '50%', maxHeight: '50%' }} src={imgLink} rounded />
-        </Col>
-        <Col xs={2} />
+        <Image
+          style={{ margin: '10px', maxWidth: '90%', maxHeight: '90%' }}
+          src={imgLink}
+          rounded
+        />
       </Row>
       <Row>
         <Col xs={2}><ControlLabel>Title: </ControlLabel></Col>

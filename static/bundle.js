@@ -24640,24 +24640,21 @@ var ImageEditable = function ImageEditable(_ref) {
         minWidth: '400px',
         maxWidth: '400px',
         minHeight: '100px',
-        maxHeight: '300px',
         border: '1px solid lightgrey'
       },
       key: id
     },
     _react2.default.createElement(
       _reactBootstrap.Grid,
-      { style: { minWidth: '170px', maxWidth: '400px' } },
+      { style: { maxWidth: '400px' } },
       _react2.default.createElement(
         _reactBootstrap.Row,
         null,
-        _react2.default.createElement(_reactBootstrap.Col, { xs: 2 }),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 8 },
-          _react2.default.createElement(_reactBootstrap.Image, { style: { maxWidth: '50%', maxHeight: '50%' }, src: imgLink, rounded: true })
-        ),
-        _react2.default.createElement(_reactBootstrap.Col, { xs: 2 })
+        _react2.default.createElement(_reactBootstrap.Image, {
+          style: { margin: '10px', maxWidth: '90%', maxHeight: '90%' },
+          src: imgLink,
+          rounded: true
+        })
       ),
       _react2.default.createElement(
         _reactBootstrap.Row,
