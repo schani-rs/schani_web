@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { Button, ControlLabel, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
 
 export const ImageComponent = ({ id, title, description, license, onClick }) => (
-  <Button onClick={() => onClick(id)} style={{ margin: '3px', textAlign: 'left', minWidth: '200px', maxWidth: '200px', minHeight: '200px' }} key={id}>
-    <Grid style={{ minWidth: '170px', maxWidth: '170px' }}>
+  <Button onClick={() => onClick(id)} style={{ margin: '3px', textAlign: 'left', minWidth: '200px', maxWidth: '400px', minHeight: '200px' }} key={id}>
+    <Grid style={{ minWidth: '170px', maxWidth: '370px' }}>
       <Row>
         <Thumbnail style={{ minHeight: '170px', minWidth: '170px', maxWidth: '170px', backgroundColor: 'lightgrey' }} src="daff" />
       </Row>
       <Row>
-        <Col xs={6}><ControlLabel>Title: </ControlLabel></Col>
-        <Col xs={6}>{title}</Col>
+        <Col xs={2}><ControlLabel>Title: </ControlLabel></Col>
+        <Col xs={10}>{title}</Col>
       </Row>
       <Row>
-        <Col xs={6}><ControlLabel>Desc: </ControlLabel></Col>
-        <Col xs={6}>{description}</Col>
+        <Col xs={2}><ControlLabel>Desc: </ControlLabel></Col>
+        <Col xs={10}>{description}</Col>
       </Row>
       <Row>
-        <Col xs={6}><ControlLabel>License: </ControlLabel></Col>
-        <Col xs={6}>{license}</Col>
+        <Col xs={2}><ControlLabel>License: </ControlLabel></Col>
+        <Col xs={10}>{license}</Col>
       </Row>
     </Grid>
   </Button>

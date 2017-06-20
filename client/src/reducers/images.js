@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { getAllImages, selectImage } from '../actions/images';
+import { getAllImagesSucc, selectImage } from '../actions/images';
 
 const defaultState = {
   images: [],
@@ -7,7 +7,7 @@ const defaultState = {
 };
 
 export default handleActions({
-  [getAllImages]: (state, action) => ({
+  [getAllImagesSucc]: (state, action) => ({
     images: action.payload,
     selected: state.selected,
   }),

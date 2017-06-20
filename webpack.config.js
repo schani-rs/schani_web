@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './client/src/index.jsx',
+  entry: ['whatwg-fetch', './client/src/index.jsx'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'static'),
@@ -26,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      SCHANI_APIGATEWAY: JSON.stringify('/localhost/8001/'),
+      SCHANI_APIGATEWAY: JSON.stringify('http://localhost:8001/api/'),
     }),
   ],
 };
