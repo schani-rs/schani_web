@@ -1,13 +1,15 @@
 import { handleActions } from 'redux-actions';
-import { getAllTags, updateTags } from '../actions/tags';
+import { getAllTagsSucc, selectTag } from '../actions/tags';
 
-const defaultState = { tags: [] };
+const defaultState = { tags: [], selected: -1 };
 
 export default handleActions({
-  [getAllTags]: (state, action) => ({
+  [getAllTagsSucc]: (state, action) => ({
     tags: action.payload,
+    selected: state.selected,
   }),
-  [updateTags]: (state, action) => ({
-    tags: action.payload,
+  [selectTag]: (state, action) => ({
+    tags: state.tags,
+    selected: action.payload,
   }),
 }, defaultState);
