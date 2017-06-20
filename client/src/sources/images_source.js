@@ -5,3 +5,5 @@ export const getAll = () =>
     .then(images => images);
 
 export default getAll;
+
+export const getImageUri = id => SCHANI_APIGATEWAY + 'images/' + id + '/file';

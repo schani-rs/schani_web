@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllImages, selectImage } from '../actions/images';
 import { ImageComponent } from '../components/Image';
-import { ImageEditable } from '../components/ImageEditable';
+import ImageEditable from './ImageEditable';
 
 class Images extends Component {
   componentDidMount() {

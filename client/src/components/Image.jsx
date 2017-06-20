@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ControlLabel, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
+import { Button, ControlLabel, Grid, Row, Col } from 'react-bootstrap';
 
 export const ImageComponent = ({ id, title, description, license, onClick }) => (
-  <Button onClick={() => onClick(id)} style={{ margin: '3px', textAlign: 'left', minWidth: '200px', maxWidth: '400px', minHeight: '200px' }} key={id}>
-    <Grid style={{ minWidth: '170px', maxWidth: '370px' }}>
-      <Row>
-        <Thumbnail style={{ minHeight: '170px', minWidth: '170px', maxWidth: '170px', backgroundColor: 'lightgrey' }} src="daff" />
-      </Row>
+  <Button
+    onClick={() => onClick(id)}
+    style={{
+      margin: '3px',
+      textAlign: 'left',
+      minWidth: '400px',
+      maxWidth: '400px',
+      minHeight: '100px',
+      maxHeight: '100px',
+    }}
+    key={id}
+  >
+    <Grid style={{ minWidth: '170px', maxWidth: '400px' }}>
       <Row>
         <Col xs={2}><ControlLabel>Title: </ControlLabel></Col>
         <Col xs={10}>{title}</Col>

@@ -14,7 +14,6 @@ export const getAllTags = () =>
     dispatch(getAllTagsStart);
     getAll()
     .then((tags) => {
-      console.log(tags);
       dispatch(getAllTagsSucc(tags));
       return Promise.resolve();
     })
