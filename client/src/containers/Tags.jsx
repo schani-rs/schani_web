@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllTags, selectTag } from '../actions/tags';
+import { Button } from 'react-bootstrap';
+import { getAllTags, selectTag, changeNewTag, addNewTag, postTag } from '../actions/tags';
 import { TagComponent } from '../components/Tag';
 import { TagEditable } from '../components/TagEditable';
+import { TagNew } from '../components/TagNew';
 
 class Tags extends Component {
   componentDidMount() {
@@ -17,8 +19,16 @@ class Tags extends Component {
       return <TagComponent onClick={this.props.selectTag} key={i.id} {...i} />;
     };
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {this.props.tags.map(i =>
+      <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
+        {this.props.inputNewTag
+          ? (<TagNew
+            label={this.props.newTagLabel}
+            postTag={this.props.postTag}
+            changeNewTag={this.props.changeNewTag}
+          />)
+          : (<Button onClick={this.props.addNewTag}>+</Button>)
+        }
+        {this.props.tags.sort((t0, t1) => t0.label.localeCompare(t1.label)).map(i =>
           getComponent(i),
         )}
       </div>
@@ -31,16 +41,26 @@ Tags.propTypes = {
   loadTags: PropTypes.func.isRequired,
   selectTag: PropTypes.func.isRequired,
   selected: PropTypes.number.isRequired,
+  addNewTag: PropTypes.func.isRequired,
+  changeNewTag: PropTypes.func.isRequired,
+  postTag: PropTypes.func.isRequired,
+  newTagLabel: PropTypes.string.isRequired,
+  inputNewTag: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   tags: state.tags.tags,
   selected: state.tags.selected,
+  newTagLabel: state.tags.newTagLabel,
+  inputNewTag: state.tags.inputNewTag,
 });
 
 const mapDispatchToProps = dispatch => ({
   loadTags: () => dispatch(getAllTags()),
   selectTag: id => dispatch(selectTag(id)),
+  changeNewTag: label => dispatch(changeNewTag(label)),
+  addNewTag: () => dispatch(addNewTag()),
+  postTag: label => dispatch(postTag(label)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tags);

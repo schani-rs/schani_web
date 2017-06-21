@@ -25,7 +25,7 @@ class Images extends Component {
     };
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {this.props.images.map(i =>
+        {this.props.images.sort((t0, t1) => t0.title.localeCompare(t1.title)).map(i =>
           getComponent(i),
         )}
       </div>
