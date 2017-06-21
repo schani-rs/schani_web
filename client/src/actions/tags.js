@@ -17,7 +17,7 @@ export const changeNewTag = createAction('CHANGE_NEW_TAG');
 
 export const getAllTags = () =>
   (dispatch) => {
-    dispatch(getAllTagsStart);
+    dispatch(getAllTagsStart());
     getAll()
     .then((tags) => {
       dispatch(getAllTagsSucc(tags));
@@ -31,7 +31,7 @@ export const getAllTags = () =>
 
 export const postTag = label =>
   (dispatch) => {
-    dispatch(postTagStart);
+    dispatch(postTagStart());
     postNew(label)
     .then((tags) => {
       dispatch(postTagSucc(tags));

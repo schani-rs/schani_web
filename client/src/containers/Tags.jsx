@@ -9,7 +9,9 @@ import { TagNew } from '../components/TagNew';
 
 class Tags extends Component {
   componentDidMount() {
-    this.props.loadTags();
+    if (this.props.tags.length === 0) {
+      this.props.loadTags();
+    }
   }
   render() {
     const getComponent = (i) => {

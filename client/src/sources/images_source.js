@@ -11,3 +11,6 @@ export const getImageUri = id => `images/${id}/file`;
 export const getTagsOfImage = id =>
   fetchWrapper(`images/${id}/tags`)
     .then(images => images);
+
+export const addTag = (imageId, tagId) =>
+  fetchWrapper(`images/${imageId}/tags/${tagId}`, { method: 'POST' });
