@@ -22,7 +22,7 @@ export const CollectionExpanded = ({ name, description, images }) => (
 CollectionExpanded.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired, // eslint-disable-line react/forbid-prop-types
-  images: PropTypes.arra.isRequired,
+  images: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default CollectionExpanded;

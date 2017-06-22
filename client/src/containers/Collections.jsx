@@ -79,7 +79,7 @@ Collections.propTypes = {
   currImages: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   inputNewName: PropTypes.string.isRequired,
   inputNewDescription: PropTypes.string.isRequired,
-  modeNewCollection: PropTypes.func.isRequired,
+  modeNewCollection: PropTypes.bool.isRequired,
   loadCollections: PropTypes.func.isRequired,
   loadImages: PropTypes.func.isRequired,
   onImageToCollecction: PropTypes.func.isRequired,
@@ -93,9 +93,9 @@ Collections.propTypes = {
 const mapStateToProps = state => ({
   collections: state.collections.collections,
   images: state.images.images,
-  selected: state.collections.seleted,
+  selected: state.collections.selected,
   currImages: state.collections.currImages,
-  inputNewTag: state.collections.inputNewTag,
+  inputNewName: state.collections.inputNewName,
   inputNewDescription: state.collections.inputNewDescription,
   modeNewCollection: state.collections.modeNewCollection,
 });
