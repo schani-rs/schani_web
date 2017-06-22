@@ -1,13 +1,40 @@
 import { handleActions } from 'redux-actions';
-import { getAllCollections, updateCollection } from '../actions/collections';
+import {
+  getAllCollectionsSucc,
+  getImagesForCollectionSucc,
+  addImageToColSucc,
+  addNewColSucc,
+  selectCollection,
+  modeNewCollection,
+} from '../actions/collections';
 
-const defaultState = { collections: [] };
+const defaultState = {
+  collections: [],
+  selected: -1,
+  currImages: [],
+  modeNewCollection: false,
+  inputNewName: '',
+  inputNewDescription: '',
+};
 
 export default handleActions({
-  [getAllCollections]: (state, action) => ({
+  [getAllCollectionsSucc]: (state, action) => (Object.assign({}, state, {
     collections: action.payload,
-  }),
-  [updateCollection]: (state, action) => ({
-    collections: action.payload,
-  }),
+  })),
+  [getImagesForCollectionSucc]: (state, action) => (Object.assign({}, state, {
+    currImages: action.payload,
+  })),
+  [addImageToColSucc]: (state, action) => (Object.assign({}, state, {
+    currImage: [...state.currImages, action.payload],
+  })),
+  [addNewColSucc]: (state, action) => (Object.assign({}, state, {
+    collections: [...state.collections, action.payload],
+    modeNewCollection: false,
+  })),
+  [selectCollection]: (state, action) => (Object.assign({}, state, {
+    selected: action.payload,
+  })),
+  [modeNewCollection]: state => (Object.assign({}, state, {
+    modeNewCollection: true,
+  })),
 }, defaultState);
