@@ -20,7 +20,7 @@ export const addNewColErr = createAction('ADD_NEW_COL_ERR');
 export const selectCollection = createAction('SELECT_COLLECTION');
 export const changeNewCollectionName = createAction('CHANGE_NEW_COLLECTION_NAME');
 export const changeNewCollectionDesc = createAction('CHANGE_NEW_COLLECTION_DESC');
-export const addNewCollection = createAction('ADD_NEW_COLLECTION');
+export const modeNewCollection = createAction('MODE_NEW_COLLECTION');
 
 export const getImagesForCollection = id =>
   (dispatch) => {
