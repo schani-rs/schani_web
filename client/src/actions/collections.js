@@ -56,6 +56,7 @@ export const addImageToCol = (collectionId, imageId) =>
     addImage(collectionId, imageId)
     .then((images) => {
       dispatch(addImageToColSucc(images));
+      dispatch(getImagesForCollection(collectionId));
       return Promise.resolve();
     })
     .catch((err) => {

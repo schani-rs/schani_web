@@ -15,6 +15,7 @@ import {
   changeNewCollectionDesc,
   modeNewCollection,
   addNewCol,
+  getImagesForCollection,
 } from '../actions/collections';
 
 class Collections extends Component {
@@ -32,13 +33,20 @@ class Collections extends Component {
       if (i.id === this.props.selected) {
         return <CollectionExpanded key={i.id} {...i} images={this.props.currImages} />;
       }
-      return (<CollectionComponent onClick={() => this.props.onSelect(i.id)} key={i.id} {...i} />);
+      return (<CollectionComponent
+        onClick={() => {
+          this.props.onSelect(i.id);
+          this.props.loadImagesOfCollection(i.id);
+        }}
+        key={i.id}
+        {...i}
+      />);
     };
     return (
       <Grid>
         <Row>
           <Col xs={9}>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
               {this.props.modeNewCollection
                 ? (<CollectionNew
                   name={this.props.inputNewName}
@@ -82,6 +90,7 @@ Collections.propTypes = {
   modeNewCollection: PropTypes.bool.isRequired,
   loadCollections: PropTypes.func.isRequired,
   loadImages: PropTypes.func.isRequired,
+  loadImagesOfCollection: PropTypes.func.isRequired,
   onImageToCollecction: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
   onChangeName: PropTypes.func.isRequired,
@@ -103,6 +112,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadCollections: () => dispatch(getAllCollections()),
   loadImages: () => dispatch(getAllImages()),
+  loadImagesOfCollection: id => dispatch(getImagesForCollection(id)),
   onImageToCollecction: (collectionId, imageId) => dispatch(addImageToCol(collectionId, imageId)),
   onSelect: id => dispatch(selectCollection(id)),
   onChangeName: name => dispatch(changeNewCollectionName(name)),

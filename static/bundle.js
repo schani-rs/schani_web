@@ -13019,6 +13019,7 @@ var addImageToCol = exports.addImageToCol = function addImageToCol(collectionId,
     dispatch(addImageToColStart());
     (0, _collections_source.addImage)(collectionId, imageId).then(function (images) {
       dispatch(addImageToColSucc(images));
+      dispatch(getImagesForCollection(collectionId));
       return Promise.resolve();
     }).catch(function (err) {
       dispatch(addImageToColErr(new Error(err)));
@@ -25318,9 +25319,13 @@ var Collections = function (_Component) {
         if (i.id === _this2.props.selected) {
           return _react2.default.createElement(_CollectionExpanded.CollectionExpanded, _extends({ key: i.id }, i, { images: _this2.props.currImages }));
         }
-        return _react2.default.createElement(_Collection.CollectionComponent, _extends({ onClick: function onClick() {
-            return _this2.props.onSelect(i.id);
-          }, key: i.id }, i));
+        return _react2.default.createElement(_Collection.CollectionComponent, _extends({
+          onClick: function onClick() {
+            _this2.props.onSelect(i.id);
+            _this2.props.loadImagesOfCollection(i.id);
+          },
+          key: i.id
+        }, i));
       };
       return _react2.default.createElement(
         _reactBootstrap.Grid,
@@ -25333,7 +25338,7 @@ var Collections = function (_Component) {
             { xs: 9 },
             _react2.default.createElement(
               'div',
-              { style: { display: 'flex', flexWrap: 'wrap' } },
+              { style: { display: 'flex', flexWrap: 'wrap', flexDirection: 'column' } },
               this.props.modeNewCollection ? _react2.default.createElement(_CollectionNew.CollectionNew, {
                 name: this.props.inputNewName,
                 description: this.props.inputNewDescription,
@@ -25388,6 +25393,7 @@ Collections.propTypes = {
   modeNewCollection: _propTypes2.default.bool.isRequired,
   loadCollections: _propTypes2.default.func.isRequired,
   loadImages: _propTypes2.default.func.isRequired,
+  loadImagesOfCollection: _propTypes2.default.func.isRequired,
   onImageToCollecction: _propTypes2.default.func.isRequired,
   onSelect: _propTypes2.default.func.isRequired,
   onChangeName: _propTypes2.default.func.isRequired,
@@ -25415,6 +25421,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     loadImages: function loadImages() {
       return dispatch((0, _images.getAllImages)());
+    },
+    loadImagesOfCollection: function loadImagesOfCollection(id) {
+      return dispatch((0, _collections.getImagesForCollection)(id));
     },
     onImageToCollecction: function onImageToCollecction(collectionId, imageId) {
       return dispatch((0, _collections.addImageToCol)(collectionId, imageId));
@@ -25860,6 +25869,14 @@ exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _define
 }), _defineProperty(_handleActions, _collections.modeNewCollection, function (state) {
   return Object.assign({}, state, {
     modeNewCollection: true
+  });
+}), _defineProperty(_handleActions, _collections.changeNewCollectionName, function (state, action) {
+  return Object.assign({}, state, {
+    inputNewName: action.payload
+  });
+}), _defineProperty(_handleActions, _collections.changeNewCollectionDesc, function (state, action) {
+  return Object.assign({}, state, {
+    inputNewDescription: action.payload
   });
 }), _handleActions), defaultState);
 

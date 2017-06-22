@@ -6,6 +6,8 @@ import {
   addNewColSucc,
   selectCollection,
   modeNewCollection,
+  changeNewCollectionName,
+  changeNewCollectionDesc,
 } from '../actions/collections';
 
 const defaultState = {
@@ -36,5 +38,11 @@ export default handleActions({
   })),
   [modeNewCollection]: state => (Object.assign({}, state, {
     modeNewCollection: true,
+  })),
+  [changeNewCollectionName]: (state, action) => (Object.assign({}, state, {
+    inputNewName: action.payload,
+  })),
+  [changeNewCollectionDesc]: (state, action) => (Object.assign({}, state, {
+    inputNewDescription: action.payload,
   })),
 }, defaultState);
